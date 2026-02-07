@@ -1,0 +1,2601 @@
+:root {
+    --bg-color: #000000;
+    /* Deep Black */
+    --bg-secondary: #050505;
+    /* Near Black */
+    --text-primary: #F5F5F5;
+    /* Silver White */
+    --text-secondary: #E0E0E0;
+    /* Light Grey */
+    --accent: #D4AF37;
+    /* Metallic Gold */
+    --accent-glow: rgba(212, 175, 55, 0.4);
+    /* Gold Glow */
+    --glass-bg: rgba(0, 0, 0, 0.8);
+    /* Dark Glass */
+    --glass-border: rgba(212, 175, 55, 0.3);
+    /* Gold Border */
+    --nav-height: 80px;
+    --font-heading: 'Inter', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-zh: 'Noto Sans TC', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #D4AF37;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #B38728;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+    color: var(--accent);
+    /* All headings Gold */
+    background: linear-gradient(to right, #BF953F, #FCF6BA, #B38728);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 2px 10px rgba(212, 175, 55, 0.2);
+}
+
+/* Bilingual Typography Hierarchy */
+small,
+.zh-sub,
+.zh-title,
+.zh-header,
+.zh-card-title,
+.zh-badge,
+.zh-btn {
+    font-family: var(--font-zh);
+    font-weight: 400;
+    display: block;
+    opacity: 1;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    color: var(--text-primary);
+    -webkit-text-fill-color: var(--text-primary);
+    /* Override gradient for subtext */
+}
+
+.zh-title {
+    font-size: 0.4em;
+    margin-top: 0.2rem;
+    display: block;
+    opacity: 0.9;
+    font-weight: 500;
+}
+
+.zh-sub,
+.zh-header {
+    font-size: 0.6em;
+    margin-left: 10px;
+    display: inline-block;
+    vertical-align: middle;
+    opacity: 0.9;
+    font-weight: 500;
+}
+
+.zh-card-title {
+    font-size: 0.7em;
+    margin-top: 0.3rem;
+    display: block;
+    color: var(--text-secondary);
+}
+
+.section-badge {
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.zh-badge {
+    font-size: 0.8em;
+    margin-left: 10px;
+    display: inline-block;
+}
+
+.zh-text,
+.zh-desc,
+.en-text,
+.card-desc {
+    font-family: var(--font-zh);
+    font-size: 17px;
+    line-height: 1.5;
+    color: var(--text-primary);
+    font-weight: 400;
+    margin-top: 0.6rem;
+    opacity: 1;
+    letter-spacing: -0.016em;
+}
+
+.view-all-container {
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.view-all-link {
+    display: inline-block;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--text-secondary);
+    padding-bottom: 5px;
+    font-size: 0.9rem;
+}
+
+.view-all-link:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s ease;
+}
+
+/* Opening Sequence */
+#opening-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    /* Pure Black */
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    pointer-events: all;
+}
+
+.opening-text {
+    font-size: 4rem;
+    font-weight: 900;
+    letter-spacing: 0.2em;
+    opacity: 0;
+    transform: scale(0.9);
+    transition: all 1.5s ease-out;
+
+    /* Gold Gradient Text */
+    background: linear-gradient(135deg, #C5A028 0%, #EAD588 50%, #C5A028 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: #D4AF37;
+    filter: drop-shadow(0 4px 10px rgba(212, 175, 55, 0.2));
+}
+
+.opening-slogan {
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: #D4AF37;
+    /* Force Gold */
+    margin-top: 1rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 1s ease-out;
+}
+
+/* Navigation */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--nav-height);
+    background: rgba(0, 0, 0, 0.85);
+    /* Dark glass */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+    z-index: 900;
+    border-bottom: 1px solid var(--glass-border);
+    transition: transform 0.3s ease;
+}
+
+.navbar .logo img {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+    /* No blend mode needed for transparent logo */
+    filter: none;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-weight: 400;
+    font-size: 13px;
+    transition: color 0.3s ease;
+    letter-spacing: -0.01em;
+}
+
+.nav-links li a:hover,
+.nav-links li a.active {
+    color: var(--accent);
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background: #000;
+}
+
+.hero-bg,
+.hero-image-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 110%;
+    height: 110%;
+    object-fit: cover;
+    z-index: 0;
+    opacity: 0.8;
+    /* Slightly more visible image */
+    transition: transform 0.1s linear;
+}
+
+/* Black Overlay for readability */
+.hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    /* Increased opacity for text contrast */
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    max-width: 800px;
+}
+
+.hero-title {
+    font-size: 5rem;
+    line-height: 1.0;
+    margin-bottom: 2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--accent);
+    /* Gold */
+    letter-spacing: 0.05em;
+    background: linear-gradient(to right, #BF953F, #FCF6BA, #B38728);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.5));
+    /* Added shadow for pop */
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    color: #EAD588;
+    /* Lighter Gold for readability */
+    letter-spacing: 0.15em;
+    margin-bottom: 3rem;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+    /* Strong shadow */
+}
+
+.scroll-down {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0.8;
+    margin-top: 2rem;
+    animation: floating 3s ease-in-out infinite;
+    color: var(--accent);
+}
+
+.scroll-line {
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+}
+
+@keyframes floating {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(10px);
+    }
+}
+
+/* Sections General */
+.section {
+    padding: 100px 5%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    z-index: 1;
+}
+
+/* Global Overlay for readability on all sections */
+.section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    /* Darker overlay for Gold/White text */
+    z-index: 1;
+}
+
+.container {
+    z-index: 2;
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.container.small {
+    max-width: 800px;
+}
+
+.section-header {
+    font-size: 2rem;
+    margin-bottom: 3rem;
+    border-left: 3px solid var(--accent);
+    padding-left: 1rem;
+    color: var(--accent);
+}
+
+/* Animation Classes */
+.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1s ease;
+}
+
+.visible {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+
+.scroll-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.delay-1 {
+    transition-delay: 0.2s;
+}
+
+.delay-2 {
+    transition-delay: 0.4s;
+}
+
+.delay-3 {
+    transition-delay: 0.6s;
+}
+
+/* Background Mapping handled via utility or inline in HTML, ensuring base style here */
+.vision,
+.services,
+.blog,
+.contact,
+.news-teaser {
+    position: relative;
+}
+
+.vision .section-title.large {
+    font-size: 5rem;
+    line-height: 1.0;
+    color: var(--accent);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.vision-text {
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 1.2rem;
+    color: var(--text-primary);
+    text-align: justify;
+    margin-top: 2rem;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+/* Glass Panel (Black & Gold) */
+.glass-panel {
+    background: rgba(10, 10, 10, 0.7);
+    /* Dark semi-transparent */
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    /* Gold Border */
+    padding: 2.5rem;
+    border-radius: 2px;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Gold Sheen on Hover */
+.glass-panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, #D4AF37, #F7E7CE, #D4AF37);
+    opacity: 0.8;
+}
+
+.glass-panel:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 60px rgba(212, 175, 55, 0.1);
+    background: rgba(20, 20, 20, 0.9);
+    border-color: var(--accent);
+}
+
+.card-icon {
+    font-size: 3rem;
+    color: var(--accent);
+    opacity: 1;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 10px rgba(212, 175, 55, 0.2);
+}
+
+/* News/Blog Cards */
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.blog-card {
+    padding: 0;
+}
+
+.blog-tag {
+    font-size: 0.7rem;
+    background: rgba(212, 175, 55, 0.2);
+    color: var(--accent);
+    padding: 0.3rem 0.6rem;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+}
+
+.blog-content h5 {
+    color: var(--text-primary);
+    margin: 0.5rem 0;
+}
+
+/* News Compact Cards (Horizontal Scroller) */
+.news-scroller {
+    display: flex;
+    overflow-x: auto;
+    gap: 1.5rem;
+    padding-bottom: 2rem;
+    margin-top: 2rem;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent) #111;
+}
+
+.news-compact-card {
+    flex: 0 0 300px;
+    display: block;
+    padding: 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(20, 20, 20, 0.8);
+}
+
+.news-compact-img {
+    height: 160px;
+    background-size: cover;
+    background-position: center;
+    border-bottom: 2px solid var(--accent);
+}
+
+.news-compact-content {
+    padding: 1.5rem;
+}
+
+.news-compact-content h5 {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    margin: 0.5rem 0;
+    line-height: 1.4;
+    text-transform: none;
+    background: none;
+    -webkit-text-fill-color: var(--text-primary);
+}
+
+.news-date {
+    color: var(--accent);
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* Form Styles */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    background: #111;
+    border: 1px solid #333;
+    color: var(--text-primary);
+    padding: 1rem;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+    border-radius: 2px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px var(--accent-glow);
+}
+
+.btn-submit {
+    background: var(--accent);
+    color: #000;
+    border: none;
+    padding: 1rem 2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    align-self: flex-start;
+}
+
+.btn-submit:hover {
+    background: #fff;
+    color: #000;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+/* Process Steps */
+.process-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2rem;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 3rem;
+}
+
+.step-item strong {
+    color: var(--accent);
+    margin-right: 10px;
+    font-size: 1.2rem;
+}
+
+/* Footer */
+footer {
+    background: #000;
+    padding: 4rem 0;
+    border-top: 1px solid #222;
+    text-align: center;
+    color: #666;
+}
+
+.social-links {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.social-links a {
+    color: #888;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+}
+
+.social-links a:hover {
+    color: var(--accent);
+}
+
+/* Mobile Menu */
+.mobile-menu-btn span {
+    background-color: var(--accent);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Typography - Porsche Style */
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    /* Standard Bold */
+    text-transform: uppercase;
+    /* Signature Porsche */
+    letter-spacing: 0.05em;
+    /* Wide tracking */
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+    color: var(--text-primary);
+}
+
+/* Bilingual Typography Hierarchy */
+small,
+.zh-sub,
+.zh-title,
+.zh-header,
+.zh-card-title,
+.zh-badge,
+.zh-btn {
+    font-family: var(--font-zh);
+    font-weight: 400;
+    /* Regular weight */
+    display: block;
+    opacity: 1;
+    /* Solid visibility */
+    text-transform: none;
+    letter-spacing: 0.02em;
+    color: var(--text-primary);
+    /* Consistent dark grey */
+}
+
+.zh-title {
+    font-size: 0.4em;
+    /* Relative to the huge heading */
+    margin-top: 0.2rem;
+    display: block;
+    /* Darkened for readability */
+    opacity: 1;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.zh-sub,
+.zh-header {
+    font-size: 0.6em;
+    margin-left: 10px;
+    display: inline-block;
+    vertical-align: middle;
+    /* Darkened for readability */
+    opacity: 1;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.zh-card-title {
+    font-size: 0.7em;
+    margin-top: 0.3rem;
+    display: block;
+    color: var(--text-secondary);
+}
+
+.section-badge {
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.zh-badge {
+    font-size: 0.8em;
+    margin-left: 10px;
+    display: inline-block;
+}
+
+.zh-text,
+.zh-desc,
+.en-text,
+.card-desc {
+    font-family: var(--font-zh);
+    font-size: 17px;
+    /* Apple Body Size */
+    line-height: 1.5;
+    /* Relaxed leading */
+    color: var(--text-primary);
+    font-weight: 400;
+    margin-top: 0.6rem;
+    opacity: 1;
+    letter-spacing: -0.016em;
+}
+
+.zh-btn {
+    font-size: 0.8em;
+    margin-left: 0.5rem;
+    font-weight: 400;
+}
+
+.view-all-container {
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.view-all-link {
+    display: inline-block;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--text-secondary);
+    padding-bottom: 5px;
+    font-size: 0.9rem;
+}
+
+.view-all-link:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
+.blog-link {
+    display: inline-block;
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    color: var(--accent);
+}
+
+.blog-link:hover {
+    text-decoration: underline;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s ease;
+}
+
+/* Animation Classes (Generic) */
+.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1s ease;
+}
+
+.visible {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* Opening Sequence */
+#opening-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.opening-text {
+    font-size: 4rem;
+    font-weight: 900;
+    letter-spacing: 0.2em;
+    opacity: 0;
+    transform: scale(0.9);
+    transition: all 1.5s ease-out;
+
+    /* Gold Gradient Text */
+    background: linear-gradient(135deg, #C5A028 0%, #EAD588 50%, #C5A028 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: #D4AF37;
+    /* Fallback */
+    filter: drop-shadow(0 4px 10px rgba(212, 175, 55, 0.2));
+}
+
+.opening-slogan {
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: var(--text-secondary);
+    margin-top: 1rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 1s ease-out;
+}
+
+/* Navigation */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--nav-height);
+    background: rgba(255, 255, 255, 0.85);
+    /* Light glass */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+    z-index: 900;
+    border-bottom: 1px solid var(--glass-border);
+    transition: transform 0.3s ease;
+}
+
+.navbar .logo {
+    /* Container layout handling */
+    display: flex;
+    align-items: center;
+}
+
+.navbar .logo a {
+    display: flex;
+    align-items: center;
+    /* Removed gap as text is removed */
+    text-decoration: none;
+}
+
+.navbar .logo img {
+    height: 60px;
+    /* Reduced slightly as it includes text */
+    width: auto;
+    object-fit: contain;
+    /* Blend mode if needed, assuming white background */
+    mix-blend-mode: multiply;
+    filter: contrast(1.1);
+}
+
+
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-weight: 400;
+    font-size: 13px;
+    /* Apple Nav Size */
+    transition: color 0.3s ease;
+    letter-spacing: -0.01em;
+}
+
+.nav-links li a:hover,
+.nav-links li a.active {
+    color: var(--text-primary);
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 110%;
+    height: 110%;
+    object-fit: cover;
+    z-index: -1;
+    filter: brightness(1.1);
+    /* Slightly brighter */
+    opacity: 0.4;
+    /* Faded as requested */
+    transition: transform 0.1s linear;
+}
+
+/* Removal of dark overly for light theme lightness */
+.hero::after {
+    display: none;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    max-width: 800px;
+}
+
+.hero-title {
+    font-size: 5rem;
+    /* Porsche Headline Scale */
+    line-height: 1.0;
+    margin-bottom: 2rem;
+    font-weight: 600;
+    /* Porsche uses a solid bold, not extra black */
+    text-transform: uppercase;
+    /* Signature Auto Luxury */
+
+    /* Porsche Style: Clean, Semi-Transparent White */
+    color: rgba(255, 255, 255, 0.7);
+    background: none;
+    -webkit-background-clip: border-box;
+    background-clip: border-box;
+    -webkit-text-stroke: 0;
+
+    /* Removed all 3D/Glow effects for flat luxury */
+    text-shadow: none;
+    filter: none;
+
+    letter-spacing: 0.05em;
+    /* Wide, premium tracking */
+}
+
+/* Metallic Shine Animation */
+@keyframes metalShine {
+    0% {
+        background-position: 200% center;
+    }
+
+    100% {
+        background-position: -200% center;
+    }
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    letter-spacing: 0.15em;
+    margin-bottom: 3rem;
+}
+
+.scroll-down {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0.7;
+    margin-top: 2rem;
+    animation: floating 3s ease-in-out infinite;
+}
+
+.scroll-text {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-bottom: 0.5rem;
+}
+
+.scroll-line {
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, #1d1d1f, transparent);
+}
+
+@keyframes floating {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(10px);
+    }
+}
+
+/* Sections General */
+/* Sections General */
+.section {
+    padding: 100px 5%;
+    min-height: 100vh;
+    /* Full viewport height for cinematic feel */
+    display: flex;
+    align-items: center;
+    position: relative;
+    /* For background positioning */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    /* Parallax-like effect */
+    z-index: 1;
+    /* Establish stacking context */
+}
+
+/* Golden Lines Overlay */
+/* Golden Lines Overlay - REMOVED */
+.section::after {
+    /* content: ''; */
+    /* background-image: ... */
+    display: none;
+}
+
+/* Ensure content is above the lines */
+.container {
+    z-index: 2;
+    position: relative;
+}
+
+/* Fix for section backgrounds to allow overlay on top of valid image */
+.vision,
+.services,
+.blog,
+.contact {
+    position: relative;
+    /* Use pseudo-element for lines to sit on top of background-image */
+}
+
+/* Contact/Cooperation Section - Vision BG with FADE */
+.contact {
+    padding: 80px 5%;
+    background-image: url('assets/vision-bg.png');
+    /* Original position rules inheritance */
+}
+
+.contact::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* White Fade Overlay */
+    background: rgba(255, 255, 255, 0.75);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.contact-form {
+    position: relative;
+    z-index: 2;
+    /* Ensure form is engaging */
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Background Overlays - Removed for cleaner white look */
+/* Background Overlay for Vision Section - Faded Look */
+.vision::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.7);
+    /* White overlay to fade background */
+    z-index: 1;
+}
+
+.container {
+    position: relative;
+    z-index: 2;
+    /* Ensure content is above overlay */
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.container.small {
+    max-width: 800px;
+}
+
+.section-header {
+    font-size: 2rem;
+    margin-bottom: 3rem;
+    border-left: 3px solid var(--accent);
+    padding-left: 1rem;
+}
+
+/* Scroll Animation Elements */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+
+.scroll-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.delay-1 {
+    transition-delay: 0.2s;
+}
+
+.delay-2 {
+    transition-delay: 0.4s;
+}
+
+/* Vision Section - Background 1 */
+.vision {
+    background-image: url('assets/BACKGROUD (1).png');
+    position: relative;
+    /* Ensure z-index works for overlay */
+}
+
+.vision .section-title.large {
+    font-size: 5rem;
+    /* Match Hero Scale */
+    line-height: 1.0;
+    color: rgba(0, 0, 0, 0.45);
+    /* Darker Grey Transparency */
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-shadow: none;
+    /* Remove shadows */
+}
+
+.vision .align-right {
+    text-align: right;
+    color: var(--text-primary);
+}
+
+.vision-text {
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    text-align: justify;
+    margin-top: 2rem;
+}
+
+/* Services Section - Background 2 */
+.services {
+    background-image: url('assets/BACKGROUD (2).png');
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+
+
+/* Refined "Porsche" Card Style with Golden Texture */
+.glass-panel {
+    background: #ffffff;
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    /* Gold Border */
+    padding: 2.5rem;
+    border-radius: 2px;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.08);
+    /* Warm Gold Shadow */
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Gold Sheen on Hover */
+.glass-panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    /* Top Gold Bar */
+    background: linear-gradient(90deg, #D4AF37, #F7E7CE, #D4AF37);
+    opacity: 0.8;
+}
+
+.glass-panel:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.85);
+    border-color: var(--accent);
+}
+
+.card-icon {
+    font-size: 3rem;
+    color: #D4AF37;
+    /* Gold Icon */
+    opacity: 0.8;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 10px rgba(212, 175, 55, 0.2);
+}
+
+.card-link {
+    display: inline-block;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+/* Blog Section */
+.blog {
+    background-image: url('assets/BACKGROUD (3).png');
+}
+
+/* News Teaser Section - Background 4 */
+.news-teaser {
+    position: relative;
+    padding: 100px 5%;
+    background-image: url('assets/BACKGROUD (4).png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.blog-card {
+    padding: 0;
+    overflow: hidden;
+}
+
+.blog-image {
+    width: 100%;
+    height: 200px;
+    background: #f0f0f0;
+    /* Gold Texture Overlay for Images */
+    border-bottom: 2px solid #D4AF37;
+    position: relative;
+}
+
+.blog-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), transparent 60%);
+    pointer-events: none;
+}
+
+.blog-content {
+    padding: 1.5rem;
+}
+
+.blog-tag {
+    font-size: 0.7rem;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.3rem 0.6rem;
+    border-radius: 20px;
+    text-transform: uppercase;
+}
+
+.blog-content h5 {
+    margin: 1rem 0;
+    font-size: 1.2rem;
+}
+
+.blog-date {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    background: #f9f9f9;
+    /* Light grey specific */
+    border: 1px solid #e0e0e0;
+    color: var(--text-primary);
+    padding: 1rem;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+    border-radius: 2px;
+    /* Sharp corners */
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-glow);
+}
+
+.btn-submit {
+    background: var(--text-primary);
+    color: #fff;
+    border: none;
+    padding: 1rem 2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s;
+    align-self: flex-start;
+}
+
+.btn-submit:hover {
+    background: var(--accent);
+}
+
+#form-feedback {
+    margin-top: 1rem;
+    font-weight: 600;
+    color: var(--accent);
+}
+
+/* Cooperation Process Steps */
+.process-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background: rgba(255, 255, 255, 0.4);
+    padding: 2rem;
+    border-radius: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    margin-bottom: 3rem;
+}
+
+.step-item {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+/* Footer */
+footer {
+    padding: 2rem 5%;
+    border-top: 1px solid var(--glass-border);
+    text-align: center;
+    color: #555;
+    font-size: 0.8rem;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 3rem;
+    }
+
+    .vision .section-title.large {
+        font-size: 3rem;
+    }
+
+    /* Mobile Menu Toggle */
+    .mobile-menu-btn {
+        display: block;
+        width: 30px;
+        height: 20px;
+        position: relative;
+        cursor: pointer;
+        z-index: 999;
+    }
+
+    .mobile-menu-btn span {
+        display: block;
+        width: 100%;
+        height: 2px;
+        background-color: #fff;
+        position: absolute;
+        transition: all 0.3s ease;
+    }
+
+    .mobile-menu-btn span:first-child {
+        top: 0;
+    }
+
+    .mobile-menu-btn span:last-child {
+        bottom: 0;
+    }
+
+    /* Hamburger Animation */
+    .mobile-menu-btn.active span:first-child {
+        transform: rotate(45deg);
+        top: 9px;
+    }
+
+    .mobile-menu-btn.active span:last-child {
+        transform: rotate(-45deg);
+        bottom: 9px;
+    }
+
+    /* Mobile Nav Drawer */
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background: rgba(10, 10, 10, 0.95);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        z-index: 990;
+        border-left: 1px solid var(--glass-border);
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
+    .nav-links li {
+        margin: 2rem 0;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+/* --- Homepage News Teaser Section (Horizontal Scroll) --- */
+.news-scroller {
+    display: flex;
+    overflow-x: auto;
+    gap: 1.5rem;
+    padding-bottom: 2rem;
+    /* Space for scrollbar */
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Hide Scrollbar but keep functionality */
+.news-scroller::-webkit-scrollbar {
+    height: 6px;
+}
+
+.news-scroller::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 3px;
+}
+
+.news-compact-card {
+    flex: 0 0 280px;
+    /* Fixed width cards */
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    padding: 0;
+    /* Remove default padding from glass-panel for this layout */
+    overflow: hidden;
+    scroll-snap-align: start;
+    height: 360px;
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    /* Gold Border */
+}
+
+/* Override glass-panel padding for this specific card */
+.glass-panel.news-compact-card {
+    padding: 0;
+}
+
+.news-compact-img {
+    height: 180px;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    border-bottom: 2px solid #D4AF37;
+}
+
+.news-compact-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    background: #fff;
+}
+
+.news-compact-card h5 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+    font-weight: 600;
+}
+
+.news-compact-card .news-date {
+    font-size: 0.75rem;
+    color: #D4AF37;
+    margin-bottom: 0.5rem;
+    display: block;
+    font-weight: 600;
+}
+
+.news-compact-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.view-all-link {
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    text-decoration: none;
+    border-bottom: 1px solid #D4AF37;
+    margin-bottom: 0.5rem;
+    transition: color 0.3s;
+}
+
+.view-all-link:hover {
+    color: #D4AF37;
+}
+
+/* Ensure images have gold overlay logic similar to blog if desired, 
+   or keep them clean for 'compact' look. I'll add the gold sheen on hover. */
+.news-compact-card:hover .news-compact-img::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), transparent);
+}
+
+/* --- Intelligence Hub (News Page) Styles --- */
+
+/* 1. Data River Background */
+#data-river-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #050505;
+}
+
+.data-stream-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        linear-gradient(rgba(0, 255, 70, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 70, 0.03) 1px, transparent 1px);
+    background-size: 20px 20px;
+    opacity: 0.3;
+}
+
+/* 2. Skeleton Loader */
+.skeleton-container {
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.skeleton-text {
+    background: #e0e0e0;
+    border-radius: 2px;
+    margin-bottom: 0.5rem;
+}
+
+.skeleton-card {
+    height: 400px;
+    position: relative;
+    overflow: hidden;
+    background: #f0f0f0;
+}
+
+.shimmer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+    transform: translateX(-100%);
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.blink {
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+/* 3. Visual Unifier (Tech Filter) */
+.news-img-wrapper {
+    position: relative;
+    overflow: hidden;
+    border-bottom: 2px solid #D4AF37;
+}
+
+.filtered-img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    transition: all 0.5s ease;
+    /* The Visual Unifier: Grayscale + Tech Blue Tint + Contrast */
+    filter: grayscale(100%) sepia(0.3) hue-rotate(180deg) contrast(1.1);
+}
+
+.news-card:hover .filtered-img {
+    filter: none;
+    /* Restore full color on hover */
+    transform: scale(1.03);
+}
+
+/* 4. Article Card Components */
+.news-tag-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #D4AF37;
+    font-size: 0.7rem;
+    padding: 4px 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    z-index: 2;
+    border: 1px solid #D4AF37;
+}
+
+.news-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: #888;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.ai-summary-mini {
+    background: rgba(41, 151, 255, 0.05);
+    /* Very light tech blue */
+    border-left: 2px solid var(--accent);
+    padding: 0.5rem;
+    font-size: 0.8rem;
+    color: #555;
+    margin-top: 1rem;
+    line-height: 1.4;
+}
+
+.ai-icon {
+    font-weight: 900;
+    color: var(--accent);
+    margin-right: 4px;
+}
+
+/* 5. Focus Modal (Reading Mode) */
+.focus-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    /* Dark Overlay */
+    backdrop-filter: blur(5px);
+    z-index: -1;
+    opacity: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.3s ease, z-index 0s linear 0.3s;
+}
+
+.focus-modal.active {
+    z-index: 2000;
+    opacity: 1;
+    transition: opacity 0.3s ease, z-index 0s;
+}
+
+.focus-content {
+    width: 90%;
+    max-width: 900px;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: #fff;
+    padding: 3rem;
+    position: relative;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    border: 1px solid #D4AF37;
+}
+
+.close-modal {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #aaa;
+}
+
+.close-modal:hover {
+    color: #000;
+}
+
+/* Modal Content Layout */
+.focus-header {
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 1rem;
+}
+
+.news-tag {
+    color: var(--accent);
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+#modal-title {
+    font-size: 2rem;
+    margin: 0.5rem 0;
+    line-height: 1.2;
+}
+
+.focus-img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    margin-bottom: 2rem;
+    border-radius: 2px;
+}
+
+.ai-summary-box {
+    background: #f9f9f9;
+    padding: 1.5rem;
+    border-left: 4px solid #D4AF37;
+    margin-bottom: 2rem;
+}
+
+.btn-read-original {
+    display: inline-block;
+    background: #000;
+    color: #fff;
+    padding: 1rem 2rem;
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    transition: background 0.3s;
+}
+
+.btn-read-original:hover {
+    background: var(--accent);
+}
+
+/* Related Grid */
+.related-posts {
+    margin-top: 3rem;
+    border-top: 1px solid #eee;
+    padding-top: 2rem;
+}
+
+.related-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.related-card {
+    cursor: pointer;
+}
+
+.related-card img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    transition: filter 0.3s;
+}
+
+.related-card h6 {
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+/* Masonry Grid (Simple CSS Grid Implementation) */
+.masonry-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+/* Full Article Typography */
+.article-content-wrapper {
+    margin-bottom: 2rem;
+    color: #333;
+    line-height: 1.8;
+}
+
+.article-content-wrapper .article-lead {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    color: #000;
+}
+
+.article-content-wrapper p {
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+}
+
+.article-content-wrapper h4 {
+    font-size: 1.3rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid #D4AF37;
+    padding-left: 1rem;
+    color: #000;
+}
+
+.article-content-wrapper ul {
+    margin-bottom: 2rem;
+    padding-left: 1.5rem;
+    list-style-type: disc;
+}
+
+.article-content-wrapper li {
+    margin-bottom: 0.8rem;
+    color: #444;
+}
+
+.article-content-wrapper strong {
+    color: #000;
+    font-weight: 700;
+}
+
+/* =========================================
+   URGENT PATCHES START
+   ========================================= */
+
+/* 1. Fix Opening Background */
+#opening-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Force Pure Black */
+    background-color: #000000 !important;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* 2. Global Colors */
+body {
+    background-color: #000000;
+    color: #FFFFFF;
+}
+
+/* 3. REMOVE ALL MASKS */
+.overlay,
+.hero-overlay,
+.hero::after,
+.hero::before,
+.video-overlay {
+    display: none !important;
+    opacity: 0 !important;
+    background: transparent !important;
+}
+
+#hero-video,
+.hero-bg,
+.hero-bg-img {
+    z-index: 0;
+    opacity: 1 !important;
+}
+
+/* 4. Content Visibility */
+.hero-content,
+.logo,
+.nav-links {
+    position: relative;
+    z-index: 10;
+}
+
+.logo a,
+h1.hero-title {
+    color: #D4AF37 !important;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+}
+
+/* 5. Transparent Navbar */
+.navbar {
+    background-color: rgba(0, 0, 0, 0.3) !important;
+    backdrop-filter: blur(5px);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+}
+
+/* 6. Content Blocks */
+.service-card,
+.text-block,
+.content-box,
+.glass-panel,
+.contact-form,
+.news-compact-card {
+    background: rgba(30, 30, 30, 0.6) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 2rem;
+    color: #E0E0E0;
+    box-shadow: none;
+}
+
+.card-desc,
+.zh-desc {
+    color: #E0E0E0 !important;
+}
+
+.card-icon,
+.section-badge,
+.btn-submit,
+.news-date {
+    color: #D4AF37 !important;
+}
+
+.btn-submit {
+    background: #D4AF37 !important;
+    color: #000 !important;
+}
+
+/* URGENT PATCHES END */
+
+/* =========================================
+   LAYOUT & DIMMING PATCHES
+   ========================================= */
+
+/* 1. Hero Background Centering */
+.hero-bg,
+.hero-image-bg,
+#hero-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+}
+
+/* 2. Hero Dark Overlay (Restored) */
+.hero::after {
+    display: block !important;
+    /* Override previous urgent patch */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    /* 50% Black */
+    z-index: 1;
+    pointer-events: none;
+    opacity: 1 !important;
+}
+
+/* 3. Deep Darkening for Inspiration (Vision) & Cooperation (Contact) */
+/* Using ::before overlay method for stronger dimming */
+.vision::before,
+.contact::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    /* 85% Deep Black */
+    z-index: 1;
+    display: block !important;
+}
+
+/* Ensure content sits above the new dark overlays */
+.vision .container,
+.contact .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Ensure background images are set correctly on the parent */
+.vision {
+    background-image: url('assets/2.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.contact {
+    background-image: url('assets/6.png');
+    background-size: cover;
+    background-position: center;
+}
+
+/* =========================================
+   FINAL OVERLAY ADJUSTMENTS (Smooth Transition)
+   ========================================= */
+
+/* 1. Hero Section: 60% Black -> Fade to 100% Black at bottom */
+.hero::after {
+    background: linear-gradient(to bottom,
+            rgba(0, 0, 0, 0.6) 0%,
+            rgba(0, 0, 0, 0.6) 80%,
+            #000000 100%) !important;
+    opacity: 1 !important;
+    display: block !important;
+    z-index: 1;
+}
+
+/* 2. Vision (1% Inspiration): Fade from Black -> 30% Overlay */
+.vision::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom,
+            #000000 0%,
+            rgba(0, 0, 0, 0.3) 20%,
+            rgba(0, 0, 0, 0.3) 100%) !important;
+    display: block !important;
+    z-index: 1;
+}
+
+/* 3. Latest News & Cooperation: Keep at 30% */
+#latest-news::before,
+#contact::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3) !important;
+    display: block !important;
+    z-index: 1;
+}
+
+/* 4. Other Sections Clear (Services, Cases) */
+.services::before,
+#cases::before {
+    display: none !important;
+}
+
+/* 5. Ensure Content is above overlays */
+.hero-content,
+.vision .container,
+#latest-news .container,
+#contact .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* 6. Ensure Hero Title remains White */
+h1.hero-title {
+    color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+    mix-blend-mode: normal !important;
+}
+
+/* 7. Scroll Down Line - White */
+.scroll-line {
+    background-color: #FFFFFF !important;
+    opacity: 0.9;
+}
+
+.scroll-text {
+    color: #FFFFFF !important;
+    opacity: 0.9;
+}
+
+/* 8. News Card Text - Black */
+.news-compact-content h5,
+.news-compact-content .news-date,
+.news-compact-content .zh-desc,
+.news-compact-content p,
+.news-compact-content span {
+    color: #000000 !important;
+    text-shadow: none !important;
+}
+
+.news-compact-content {
+    background: #ffffff !important;
+    /* Ensure white bg */
+}
+
+/* 9. Case Study Images (New) */
+.blog-image {
+    height: 200px;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+}
+
+.blog-card {
+    padding: 0 !important;
+    /* Remove padding to let image flush */
+    overflow: hidden;
+    /* Round corners */
+}
+
+.blog-content {
+    padding: 2.5rem;
+    /* Re-add padding for content */
+}
+
+/* =========================================
+   VISION SECTION REDESIGN (Services Style Hexagons - Dark)
+   ========================================= */
+
+/* 1. Layout: Honeycomb Cluster */
+.vision .services-grid {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0 !important;
+    margin-top: 4rem;
+    grid-template-columns: none !important;
+}
+
+/* 2. Hexagon Card Shape (True Gold Border - No Fill) */
+.vision .glass-panel {
+    width: 360px !important;
+    height: 400px !important;
+
+    /* Content Padding */
+    padding: 5.5rem 2.5rem 2.5rem 2.5rem !important;
+
+    /* Hexagon Clip Path */
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+
+    /* Transparent Background (Dark Glass Only) - NO GOLD FILL */
+    background: rgba(30, 30, 30, 0.6) !important;
+    backdrop-filter: blur(10px);
+
+    /* Content Layout */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+
+    /* Depth */
+    box-shadow: none !important;
+    border: none !important;
+    filter: drop-shadow(0 20px 20px rgba(0, 0, 0, 0.8));
+
+    margin: 0 2px !important;
+    position: relative;
+    z-index: 1;
+}
+
+/* 3. Gold Border Ring (Using Mask to Cut Out Center) */
+.vision .glass-panel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+
+    /* The Border Width: 0.1cm ~ 3.8px. Using 3.5px for visual balance. */
+    padding: 3.5px;
+
+    /* The Gold Color */
+    background: linear-gradient(135deg, #bf953f 0%, #d4af37 50%, #aa771c 100%);
+
+    /* Mask: Cut out the content box, leaving only the padding area (border) */
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+
+    /* Ensure it respects the hexagon shape */
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+/* Hover Effect */
+.vision .glass-panel:hover {
+    transform: translateY(-5px) !important;
+    background: rgba(40, 40, 40, 0.8) !important;
+    /* Lighten Glass */
+    filter: drop-shadow(0 15px 40px rgba(212, 175, 55, 0.3));
+    z-index: 10;
+}
+
+/* Middle Card Shift */
+.vision .glass-panel:nth-child(2) {
+    margin-top: 80px !important;
+}
+
+/* Core Values Content Shift (Move UP 0.7cm) */
+.vision .glass-panel:nth-child(3) {
+    padding-top: 4rem !important;
+}
+
+/* 4. Typography (Services Style: White & Grey) */
+
+/* Headers */
+.vision .glass-panel h4 {
+    font-size: 1.4rem !important;
+    margin-bottom: 1rem !important;
+    border-bottom: 2px solid var(--accent);
+    /* Accent Color Line */
+    padding-bottom: 0.5rem;
+    width: 60%;
+    color: #FFFFFF !important;
+    text-shadow: none !important;
+    font-weight: 600;
+}
+
+.vision .glass-panel h4 .zh-header {
+    font-size: 1.1rem !important;
+    margin-left: 0.5rem;
+    display: block;
+    margin-top: 0.2rem;
+    color: #CCC;
+    /* Subtle Grey */
+}
+
+/* Key Text */
+.vision .glass-panel .zh-sub {
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+    color: #E0E0E0 !important;
+    line-height: 1.5 !important;
+    margin-bottom: 0.8rem !important;
+    text-shadow: none;
+}
+
+/* Description Text */
+.vision .glass-panel .zh-desc {
+    color: #AAA !important;
+    /* Muted Grey */
+    font-weight: 400;
+    font-size: 0.9rem !important;
+    line-height: 1.5 !important;
+}
+
+/* Icons Clean */
+.vision .card-icon {
+    display: none !important;
+}
+
+/* Core Values (List) - Compact Mode */
+.vision .glass-panel ul {
+    padding: 0;
+    margin: 0;
+    margin-top: 0.2rem !important;
+    /* Tighten top space */
+}
+
+.vision .glass-panel ul li {
+    font-size: 0.85rem !important;
+    margin-bottom: 0.2rem !important;
+    /* Tightened 0.5 -> 0.2 */
+    color: #AAA !important;
+    line-height: 1.25 !important;
+    /* Tightened 1.4 -> 1.25 */
+}
+
+.vision .glass-panel ul li strong {
+    color: #FFF !important;
+    font-size: 0.9rem !important;
+    display: block;
+    margin-bottom: 0.05rem;
+    /* Tightened 0.2 -> 0.05 */
+}
+
+/* =========================================
+   BACKGROUND UPDATES (Darker Vision + Black Below)
+   ========================================= */
+
+/* 1. Vision Background: Brighter (+25%) & Seamless to Black */
+/* Overlay darken - Adjusted to allow more bg visibility (0.8 -> 0.7) */
+.vision::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Start Black, Fade to 70% Black, End Pure Black */
+    background: linear-gradient(to bottom,
+            #000000 0%,
+            rgba(0, 0, 0, 0.7) 50%,
+            #000000 100%) !important;
+    z-index: 0;
+    display: block !important;
+}
+
+/* 2. Force Pure Black Structure Below Vision */
+#services,
+#cases,
+#contact,
+footer,
+.services-section,
+/* Alternate class names safety */
+.cases-section,
+.contact-section {
+    background-color: #000000 !important;
+    background-image: none !important;
+    /* Remove bg images */
+    position: relative;
+    z-index: 2;
+    /* Ensure on top */
+}
+
+/* Override any bg on specific IDs */
+#services {
+    background: #000 !important;
+}
+
+#cases {
+    background: #000 !important;
+}
+
+#contact {
+    background: #000 !important;
+}
+/* =========================================
+   CONTACT FORM REDESIGN (FINAL FIX)
+   ========================================= */
+
+/* 1. Container - Sleek Dark Glass */
+.contact-form {
+    background: rgba(10, 10, 10, 0.6) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    padding: 3rem !important;
+    border-radius: 4px;
+}
+
+/* 2. Inputs - Dark Transparent + Gold Focus */
+.form-group input,
+.form-group textarea,
+.form-group select {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: #FFFFFF !important;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    border-radius: 0px !important; /* Premium sharp edges */
+    padding: 1.2rem !important;
+    transition: all 0.3s ease;
+}
+
+/* Focus State */
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    background: rgba(0, 0, 0, 0.5) !important;
+    border-color: #D4AF37 !important;
+    box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.3) !important;
+    outline: none;
+}
+
+/* 3. Autofill Fix (The White Box Killer) */
+.form-group input:-webkit-autofill,
+.form-group input:-webkit-autofill:hover,
+.form-group input:-webkit-autofill:focus,
+.form-group textarea:-webkit-autofill,
+.form-group textarea:-webkit-autofill:hover,
+.form-group textarea:-webkit-autofill:focus,
+.form-group select:-webkit-autofill,
+.form-group select:-webkit-autofill:hover,
+.form-group select:-webkit-autofill:focus {
+    -webkit-text-fill-color: #FFFFFF !important;
+    -webkit-box-shadow: 0 0 0px 1000px #0a0a0a inset !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+/* 4. Labels */
+.form-group label {
+    color: #aaaaaa !important;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.75rem !important;
+    margin-bottom: 0.8rem;
+}
+
+/* 5. Submit Button - Premium Gold Gradient */
+.contact-form .btn-submit {
+    background: linear-gradient(135deg, #CFAB36 0%, #EAD588 50%, #C49F27 100%) !important;
+    color: #000000 !important;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    border: none;
+    padding: 1.2rem 3rem !important;
+    margin-top: 1rem;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-form .btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+}
+
+
+/* fix: hide mobile menu button on desktop to align navbar right */
+@media (min-width: 769px) {
+    .mobile-menu-btn {
+        display: none !important;
+    }
+}
+
+/* fix: adjust hero image alignment */
+.hero-bg {
+    object-position: 50.5% center !important;
+}
