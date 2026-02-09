@@ -80,6 +80,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let ticking = false;
 
     document.addEventListener('mousemove', (e) => {
+        // Mobile Optimization: Disable parallax on small screens
+        if (window.innerWidth <= 768) return;
+
         if (!ticking && window.scrollY < window.innerHeight) {
             window.requestAnimationFrame(() => {
                 const x = (window.innerWidth / 2 - e.clientX) / 50;
